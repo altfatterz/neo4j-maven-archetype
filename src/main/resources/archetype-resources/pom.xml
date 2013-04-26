@@ -8,7 +8,7 @@
     <packaging>jar</packaging>
 
     <name>Neo4j Maven Archetype</name>
-    <url>http://bachman.cz</url>
+    <url>http://graphaware.com</url>
 
     <properties>
         <java.version>1.6</java.version>
