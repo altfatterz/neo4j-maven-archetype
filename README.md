@@ -12,6 +12,6 @@ Then navigate to where you want to create your new project and type:
 
     mvn archetype:generate -DarchetypeGroupId=cz.bachman -DarchetypeArtifactId=neo4j-maven-archetype -DarchetypeVersion=1.0-SNAPSHOT
 
-Answer a couple of questions along the way (about your root groupId, artifactId and so on), after which you should see
+Answer a couple of questions along the way (about your groupId, artifactId and so on), after which you should see
 
     [INFO] BUILD SUCCESS
