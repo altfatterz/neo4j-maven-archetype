@@ -23,23 +23,83 @@
     <version>${version}</version>
     <packaging>jar</packaging>
 
+    <parent>
+        <groupId>org.sonatype.oss</groupId>
+        <artifactId>oss-parent</artifactId>
+        <version>7</version>
+    </parent>
+
     <name>Neo4j Maven Archetype</name>
+    <description>Neo4j Maven Archetype</description>
     <url>http://graphaware.com</url>
+
+    <licenses>
+        <license>
+            <name>GNU General Public License, version 3</name>
+            <url>http://www.gnu.org/licenses/gpl-3.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <scm>
+        <connection>scm:git:git@github.com:graphaware/${artifactId}.git</connection>
+        <developerConnection>scm:git:git@github.com:graphaware/${artifactId}.git</developerConnection>
+        <url>git@github.com:graphaware/${artifactId}.git</url>
+    </scm>
+
+    <developers>
+        <developer>
+            <id>bachmanm</id>
+            <name>Michal Bachman</name>
+            <email>${artifactId}@graphaware.com</email>
+        </developer>
+    </developers>
+
+    <profiles>
+        <profile>
+            <id>release-sign-artifacts</id>
+            <activation>
+                <property>
+                    <name>performRelease</name>
+                    <value>true</value>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>1.1</version>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
     <properties>
         <java.version>1.6</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <neo4j.version>1.8.2</neo4j.version>
+        <graphaware.utils.version>0.3-SNAPSHOT</graphaware.utils.version>
     </properties>
 
-    <repositories>
-        <repository>
-            <id>neo</id>
-            <url>http://m2.neo4j.org/</url>
-        </repository>
-    </repositories>
-
     <dependencies>
+
+        <!-- GraphAware -->
+        <dependency>
+            <groupId>com.graphaware</groupId>
+            <artifactId>neo4j-utils</artifactId>
+            <version>${graphaware.utils.version}</version>
+        </dependency>
 
         <!-- Neo4j -->
         <dependency>
@@ -87,6 +147,32 @@
                     <target>${java.version}</target>
                     <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.2.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.9</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
