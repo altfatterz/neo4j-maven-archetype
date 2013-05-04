@@ -24,6 +24,10 @@
     </sources>
     <resources>
         <resource>src/main/resources/DummyResource.txt</resource>
+        <resource>./travis.yml</resource>
+        <resource>gpl.txt</resource>
+        <resource>README.md</resource>
+        <resource>.gitignore</resource>
     </resources>
     <testSources>
         <source>src/test/java/DummyTestClass.java</source>
